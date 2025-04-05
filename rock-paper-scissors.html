@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Rock Paper Scissor</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <h1>Rock Paper Scissors</h1>
+    <div class="scoreboard">
+      Player: <span id="playerScore">0</span> | Computer:
+      <span id="computerScore">0</span>
+    </div>
+    <div class="game-area">
+      <img id="playerHand" class="hand-img" src="rock.jpg" alt="Player hand" />
+      <img
+        id="computerHand"
+        class="hand-img"
+        src="rock.jpg"
+        alt="Computer hand"
+      />
+    </div>
+    <div class="result" id="resultDisplay">Choose your move!</div>
+    <div class="buttons">
+      <button onclick="playGame('rock')">Rock</button>
+      <button onclick="playGame('paper')">Paper</button>
+      <button onclick="playGame('scissor')">Scissors</button>
+    </div>
+    <script>
+      let playerScore = 0;
+      let computerScore = 0;
+      const moveImages = {
+        rock: "rock.jpg",
+        paper: "paper.jpg",
+        scissor: "scissor.jpg",
+      };
+
+      function playGame(playerMove) {
+        const moves = ["rock", "paper", "scissor"];
+        const computerMove = moves[Math.floor(Math.random() * 3)];
+        const playerHand = document.getElementById("playerHand");
+        const computerHand = document.getElementById("computerHand");
+        const resultDisplay = document.getElementById("resultDisplay");
+
+        playerHand.src = "rock.jpg";
+        computerHand.src = "rock.jpg";
+        resultDisplay.textContent = "Rock... Paper... Scissors... SHOOT!";
+        playerHand.classList.add("animate");
+        computerHand.classList.add("animate");
+
+        setTimeout(() => {
+          playerHand.classList.remove("animate");
+          computerHand.classList.remove("animate");
+
+          playerHand.src = moveImages[playerMove];
+          computerHand.src = moveImages[computerMove];
+
+          let result = "";
+          if (playerMove === computerMove) {
+            result = "It's a tie!";
+          } else if (
+            (playerMove === "rock" && computerMove === "scissor") ||
+            (playerMove === "paper" && computerMove === "rock") ||
+            (playerMove === "scissor" && computerMove === "paper")
+          ) {
+            result = "You win!";
+            playerScore++;
+          } else {
+            result = "You lose!";
+            computerScore++;
+          }
+
+          resultDisplay.innerHTML = 
+          `You choose <strong>${playerMove}</strong>.<br>` +
+          `Computer choose <strong>${computerMove}</strong>.<br>` +
+          `<strong>${result}</strong>` ;
+
+          document.getElementById("playerScore").textContent = playerScore;
+          document.getElementById("computerScore").textContent = computerScore;
+        } ,1000);
+      }
+    </script>
+  </body>
+</html>
