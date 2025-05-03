@@ -1,5 +1,54 @@
-$primary-color: #3490dc;
-
-body {
-  background-color: $primary-color;
+.navigation-bar {
+  background-color: #fff;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  padding: 15px 20px;
+  border-radius: 25px;
+  box-shadow: 0 -2px 5px rgba(0, 0, 0, 0.05);
+  position: relative; /* For the active indicator */
+  width: 80%; /* Adjust as needed */
+  max-width: 500px; /* Adjust as needed */
+  margin: 0 auto; /* Center the navigation bar */
 }
+
+.nav-item {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 1.5em;
+  color: #333;
+  cursor: pointer;
+  padding: 10px;
+  z-index: 1; /* Ensure icons are above the indicator */
+}
+
+.nav-item.middle {
+  transform: translateY(-20px); /* Push the middle icon up */
+}
+
+.nav-item.active {
+  /* You can add specific styling for the active icon if needed */
+  color: #16a381;
+}
+
+.active-indicator {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: calc(100% / 5); /* Assuming 5 items */
+  height: 5px; /* Adjust indicator height */
+  background-color: #16a381;
+  border-radius: 5px 5px 0 0;
+  transition: transform 0.3s ease-in-out;
+  z-index: 0; /* Place indicator below icons */
+  margin-left: 10px;
+}
+
+.nav-item.middle.active ~ .active-indicator {
+  background-color: #22c55e; /* Different color for the middle active state */
+  height: 10px; /* Make the middle active indicator taller */
+  border-radius: 10px 10px 0 0;
+}
+
+/* ---------------------------------------------------------------------------------------- */
